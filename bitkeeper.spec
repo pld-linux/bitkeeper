@@ -28,7 +28,7 @@ umask 022
 dd if=%{SOURCE0} skip=1 bs=7008 | gzip -d | tar xf -
 %endif
 %ifarch alpha
-dd if=%{SOURCE1} skip=1 bs=7008 | gzip -d | tar xf -
+dd if=%{SOURCE1} skip=1 bs=7354 | gzip -d | tar xf -
 %endif
 %ifarch ppc
 dd if=%{SOURCE2} skip=1 bs=6864 | gzip -d | tar xf -
