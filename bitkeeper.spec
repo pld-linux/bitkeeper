@@ -7,7 +7,7 @@ License:	BitKeeper
 Group:		Development/Version Control
 Source0:	http://www.bitmover.com/download/bk-2.1.x/x86-glibc22-linux.bin
 Source1:	http://www.bitmover.com/download/bk-2.1.x/alphaev56-glibc21-linux.bin
-Source2		http://www.bitmover.com/download/bk-2.1.x/powerpc-glibc21-linux.bin
+Source2:	http://www.bitmover.com/download/bk-2.1.x/powerpc-glibc21-linux.bin
 Source3:	http://www.bitmover.com/download/bk-2.1.x/sparc64-glibc21-linux.bin
 URL:		http://www.bitkeeper.com/
 Requires:	tk >= 8.0
