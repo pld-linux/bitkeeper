@@ -16,7 +16,7 @@ ExclusiveArch:	%{ix86} alpha ppc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-A distributed concurent versioning system better than CVS.
+A distributed concurrent versioning system better than CVS.
 
 %description -l pl
 System kontroli wersji lepszy ni¿ CVS.
