@@ -1,18 +1,18 @@
 Summary:	A distributed concurent versioning system better than CVS
 Summary(pl):	System kontroli wersji lepszy ni¿ CVS
 Name:		bitkeeper
-Version:	3.0.2
+Version:	3.2.0
 Release:	1
 License:	BitKeeper
 Group:		Development/Version Control
-Source0:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.0.x/bk-3.0.2-x86-glibc22-linux.bin
-# Source0-md5:	cfd8f586e8c379c9d4eaa11fb5064d62
-Source1:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.0.x/bk-3.0.2-alpha-glibc22-linux.bin
-# Source1-md5:	da28d1cb564ffcf71342eeeec257f06b
-Source2:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.0.x/bk-3.0.2-powerpc-glibc21-linux.bin
-# Source2-md5:	3de240272530fdbd8f60732ced7dbf83
-Source3:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.0.x/bk-3.0.2-sparc-glibc21-linux.bin
-# Source3-md5:	646eb0dbad5b41c8aa8b6d2e5a9f7957
+Source0:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.2.0/bk-%{version}-x86-glibc23-linux.bin
+# Source0-md5:	21a14b3ea291ef70d59d350ccde4f19a
+Source1:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.2.0/bk-%{version}-alpha-glibc22-linux.bin
+# Source1-md5:	e1cb11215b03fd30e7e4b5fb5763d3e2
+Source2:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.2.0/bk-%{version}-powerpc-glibc21-linux.bin
+# Source2-md5:	7ad959ee34f35516bd607bdd1192171c
+Source3:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.2.0/bk-%{version}-sparc-glibc21-linux.bin
+# Source3-md5:	bd432ed8612d5d7d884c3418615d658f
 URL:		http://www.bitkeeper.com/
 Requires:	tk >= 8.0
 BuildRequires:	fileutils
@@ -43,14 +43,25 @@ SRC=%{SOURCE2}
 SRC=%{SOURCE3}
 %endif
 
-perl -e 'while (<>) {s/.*(\037\213)/$1/ and last;} do { print } while (<>) ' ${SRC} | gzip -d | tar xf -
-
+chmod 755 ${SRC}
+${SRC} bitkeeper
+chmod -R u+rwX,a+rX .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_libdir}/%{name},%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_libdir}/%{name},%{_bindir},%{_mandir}/man1}
 
 cp -ap bitkeeper/* $RPM_BUILD_ROOT%{_libdir}/%{name}
+
+for man in $RPM_BUILD_ROOT%{_libdir}/%{name}/man/man1/*; do
+	tman=$(basename "$man")
+	if ! (echo "$tman" | grep -Eq "^bk-"); then
+		tman="bk-$tman"
+	fi
+	mv $man $RPM_BUILD_ROOT%{_mandir}/man1/${tman}
+done
+
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/man/
 
 ln -s %{_libdir}/%{name}/bitkeeper.config $RPM_BUILD_ROOT%{_sysconfdir}
 
@@ -66,4 +77,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc bitkeeper/*.pdf
 %attr(755,root,root) %{_bindir}/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
+%{_mandir}/man*/*
 %attr(-,root,root) %{_libdir}/%{name}
