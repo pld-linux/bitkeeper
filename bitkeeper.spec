@@ -16,6 +16,7 @@ Source3:	http://bitkeeper:get%20bitkeeper@www.bitmover.com/download/bk-3.0.x/bk-
 URL:		http://www.bitkeeper.com/
 Requires:	tk >= 8.0
 BuildRequires:	fileutils
+BuildRequires:	perl-base
 ExclusiveArch:	%{ix86} alpha ppc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -28,18 +29,22 @@ System kontroli wersji lepszy ni¿ CVS.
 %prep
 %setup -q -c -T
 umask 022
+SRC=
 %ifarch %{ix86}
-dd if=%{SOURCE0} skip=1 bs=7008 | gzip -d | tar xf -
+SRC=%{SOURCE0}
 %endif
 %ifarch alpha
-dd if=%{SOURCE1} skip=1 bs=7354 | gzip -d | tar xf -
+SRC=%{SOURCE1}
 %endif
 %ifarch ppc
-dd if=%{SOURCE2} skip=1 bs=6864 | gzip -d | tar xf -
+SRC=%{SOURCE2}
 %endif
 %ifarch sparc64
-dd if=%{SOURCE3} skip=1 bs=6704 | gzip -d | tar xf -
+SRC=%{SOURCE3}
 %endif
+
+perl -e 'while (<>) {s/.*(\037\213)/$1/ and last;} do { print } while (<>) ' ${SRC} | gzip -d | tar xf -
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
