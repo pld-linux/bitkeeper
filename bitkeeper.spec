@@ -12,7 +12,7 @@ Source3:	http://www.bitmover.com/download/bk-2.1.x/sparc64-glibc21-linux.bin
 URL:		http://www.bitkeeper.com/
 Requires:	tk >= 8.0
 BuildRequires:	fileutils
-ExclusiveArch:	%{ix86}
+ExclusiveArch:	%{ix86} alpha ppc sparc64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
