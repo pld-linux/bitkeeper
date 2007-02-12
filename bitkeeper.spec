@@ -1,5 +1,5 @@
 Summary:	A distributed concurent versioning system better than CVS
-Summary(pl.UTF-8):   System kontroli wersji lepszy niż CVS
+Summary(pl.UTF-8):	System kontroli wersji lepszy niż CVS
 Name:		bitkeeper
 Version:	3.2.0
 Release:	1
