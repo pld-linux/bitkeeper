@@ -1,5 +1,5 @@
 Summary:	A distributed concurent versioning system better than CVS
-Summary(pl):	System kontroli wersji lepszy niø CVS
+Summary(pl.UTF-8):   System kontroli wersji lepszy ni≈º CVS
 Name:		bitkeeper
 Version:	3.2.0
 Release:	1
@@ -23,8 +23,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 A distributed concurrent versioning system better than CVS.
 
-%description -l pl
-System kontroli wersji lepszy niø CVS.
+%description -l pl.UTF-8
+System kontroli wersji lepszy ni≈º CVS.
 
 %prep
 %setup -q -c -T
